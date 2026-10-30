@@ -2,139 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hayoon Park — Architecture &amp; Research</title>
-  <meta name="description" content="Hayoon Park, architectural designer and researcher. Timber tectonics, heritage reversibility and computational evidence.">
-  <meta property="og:title" content="Hayoon Park — Architecture & Research">
-  <meta property="og:description" content="Timber tectonics × Heritage reversibility × Computational evidence">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>off-hours</title>
+  <meta name="description" content="off-hours — architecture, research and design by Hayoon Park, Seoul. This site is under construction.">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="off-hours">
+  <meta property="og:description" content="Extensions from exclusions. Site under construction.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <style>
+    :root { --paper: #efece4; --ink: #141414; --mute: #55595b; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: var(--paper); color: var(--ink);
+      font-family: "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      display: grid; grid-template-rows: 1fr auto; min-height: 100%;
+      padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+    }
+    main { display: grid; place-items: center; text-align: center; }
+    .mark { width: min(180px, 42vw); height: auto; display: block; margin: 0 auto 40px; }
+    h1 { font-size: 15px; font-weight: 500; margin: 0 0 6px; letter-spacing: 0.01em; }
+    p { font-size: 15px; margin: 0; color: var(--mute); line-height: 1.6; }
+    footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--mute); }
+    a { color: inherit; text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  </style>
 </head>
-<body data-page="home">
-  <a class="skip" href="#work">Skip to work</a>
-
-  <div class="wrap">
-    <header class="site-head">
-      <a class="wordmark" href="index.html">OFF-HOURS</a>
-      <nav class="site-nav" aria-label="Main">
-        <a href="#work" data-ui="work">Work</a>
-        <a href="#position" data-ui="position">Position</a>
-        <a href="#writing" data-ui="writing">Writing</a>
-        <a href="#about" data-ui="about">About</a>
-        <button class="lang-toggle" type="button">한국어</button>
-      </nav>
-    </header>
-
-    <main>
-      <div class="hero">
-        <h1 class="hero-name">Hayoon<br>Park</h1>
-        <div class="hero-grid">
-          <div>
-            <p class="statement" id="statement"></p>
-            <p class="role" id="role"></p>
-          </div>
-          <svg class="drawing" viewBox="0 0 640 430" role="img" aria-labelledby="dwg-t">
-<title id="dwg-t">Section: heritage houses, a mass timber tower on an RC core, and the underground pedestrian route linking them</title>
-<defs><pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="4" stroke="var(--larch)" stroke-width="1.2"/></pattern><pattern id="earth" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="7" stroke="currentColor" stroke-width="0.4" opacity="0.45"/></pattern></defs>
-<path class="fade" style="--d:.2s" fill="url(#earth)" d="M0 318H640V430H0Z M40 352H560V392H40Z" fill-rule="evenodd"/>
-<line class="ln ground draw" style="--len:660" x1="0" y1="318" x2="640" y2="318"/>
-<path class="ln draw" style="--len:1200;--d:.3s" d="M40 352H560V392H40Z"/>
-<path class="ln thin draw" style="--len:120;--d:.6s" d="M150 352 L180 318 M162 352 L192 318"/>
-<path class="ln thin draw" style="--len:120;--d:.6s" d="M270 352 L300 318 M282 352 L312 318"/>
-<path class="ln draw" style="--len:420;--d:0.40s" d="M36 318V284M94 318V284M36 284H94M20 288Q42.6 284 51.0 268H79.0Q87.4 284 110 288"/>
-<path class="ln draw" style="--len:420;--d:0.55s" d="M128 318V288M174 318V288M128 288H174M112 292Q132.44 288 139.4 272H162.6Q169.56 288 190 292"/>
-<path class="ln draw" style="--len:420;--d:0.70s" d="M202 318V282M264 318V282M202 282H264M186 286Q209.32 282 218.2 266H247.8Q256.68 282 280 286"/>
-<line class="ln draw" style="--len:300;--d:.7s" x1="338" y1="318" x2="338" y2="63"/>
-<line class="ln draw" style="--len:300;--d:.7s" x1="374" y1="318" x2="374" y2="63"/>
-<line class="ln draw" style="--len:300;--d:.7s" x1="446" y1="318" x2="446" y2="63"/>
-<line class="ln draw" style="--len:300;--d:.7s" x1="476" y1="318" x2="476" y2="63"/>
-<line class="ln draw" style="--len:300;--d:.7s" x1="512" y1="318" x2="512" y2="63"/>
-<rect class="core fade" style="--d:1s" x="398" y="51" width="26" height="267"/>
-<rect class="cut fade" style="--d:1.04s" x="330" y="301.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.08s" x="330" y="286.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.12s" x="330" y="271.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.16s" x="330" y="256.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.20s" x="330" y="241.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.24s" x="330" y="226.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.28s" x="330" y="211.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.32s" x="330" y="196.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.36s" x="330" y="181.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.40s" x="330" y="166.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.44s" x="330" y="151.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.48s" x="330" y="136.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.52s" x="330" y="121.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.56s" x="330" y="106.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.60s" x="330" y="91.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.64s" x="330" y="76.5" width="190" height="3"/>
-<rect class="cut fade" style="--d:1.68s" x="330" y="61.5" width="190" height="3"/>
-<rect class="ln fade" style="--d:1s" x="324" y="318" width="202" height="26"/>
-<g class="fade" style="--d:1.7s"><path class="ln thin" d="M520 108L560 88"/><text class="note" x="563" y="91" text-anchor="start">CLT slab</text></g>
-<g class="fade" style="--d:1.8s"><path class="ln thin" d="M512 258L560 278"/><text class="note" x="563" y="281" text-anchor="start">Glulam column</text></g>
-<g class="fade" style="--d:1.9s"><path class="ln thin" d="M411 51L450 33"/><text class="note" x="453" y="36" text-anchor="start">RC core</text></g>
-<g class="fade" style="--d:2.0s"><path class="ln thin" d="M230 392L250 414"/><text class="note" x="253" y="417" text-anchor="start">Heritage pedestrian route</text></g>
-<g class="fade" style="--d:2.1s"><path class="ln thin" d="M66 268L84 240"/><text class="note" x="87" y="243" text-anchor="start">Existing fabric</text></g>
-</svg>
-        </div>
-        <dl class="title-block">
-          <div><dt data-ui="sheet">Sheet</dt><dd id="tb-sheet"></dd></div>
-          <div><dt data-ui="scale">Scale</dt><dd id="tb-scale"></dd></div>
-          <div><dt data-ui="drawn">Drawn</dt><dd id="tb-drawn"></dd></div>
-          <div><dt data-ui="revised">Revised</dt><dd id="tb-rev"></dd></div>
-        </dl>
-      </div>
-
-      <section id="work">
-        <div class="sec-head"><h2 data-ui="work">Work</h2><p data-ui="workIntro"></p></div>
-        <table class="register">
-          <thead><tr>
-            <th scope="col" data-ui="ref">Ref</th>
-            <th scope="col" data-ui="project">Project</th>
-            <th scope="col" data-ui="status">Status</th>
-            <th scope="col" data-ui="year">Year</th>
-          </tr></thead>
-          <tbody id="register-body"></tbody>
-        </table>
-      </section>
-
-      <section id="position">
-        <div class="sec-head"><h2 data-ui="position">Position</h2><p data-ui="posIntro"></p></div>
-        <div class="axes" id="axes"></div>
-      </section>
-
-      <section id="writing">
-        <div class="sec-head"><h2 data-ui="writing">Writing</h2><p data-ui="writingIntro"></p></div>
-        <ul class="journal" id="journal"></ul>
-      </section>
-
-      <section id="about">
-        <div class="sec-head"><h2 data-ui="about">About</h2><p></p></div>
-        <div class="about">
-          <div></div>
-          <div class="about-body">
-            <p id="about-text"></p>
-            <div class="facts">
-              <div><h3 data-ui="education">Education</h3><ul id="edu"></ul></div>
-              <div><h3 data-ui="tools">Tools</h3><ul class="tools" id="tools"></ul></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-foot">
-      <div class="foot-grid">
-        <div class="contact" id="contact"></div>
-        <p class="small">© Hayoon Park <span id="year"></span></p>
-      </div>
-    </footer>
-  </div>
-
-  <script src="assets/js/content.js"></script>
-  <script src="assets/js/site.js"></script>
-  <script src="assets/js/intro.js"></script>
+<body>
+  <main>
+    <div>
+      <img class="mark" src="assets/img/offhours-mark.svg" alt="off hours">
+      <h1>This site is under construction.</h1>
+      <p>Please check back soon.</p>
+    </div>
+  </main>
+  <footer>
+    <span>Based in Seoul, South Korea</span>
+    <span>&copy; off-hours <span id="y">2026</span></span>
+  </footer>
+  <script>
+    (function () { var s = 2026, n = new Date().getFullYear(); document.getElementById('y').textContent = n > s ? s + '–' + n : s; })();
+  </script>
 </body>
 </html>
