@@ -11,7 +11,7 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&display=swap" rel="stylesheet">
   <style>
     /* Intro (blinds) — same as full site */
     :root { --f-sans: "Archivo", "Noto Sans KR", system-ui, sans-serif; }
@@ -28,6 +28,7 @@
       color: #ffffff; font-family: "La Belle Aurore", cursive; font-weight: 400;
       font-size: clamp(3rem, 11vw, 9.5rem); letter-spacing: 0; line-height: 1;
       transition: opacity 300ms ease-out, transform 300ms ease-out; }
+    .intro-logo img { width: min(64vw, 780px); height: auto; display: block; }
     .intro-logo.out { opacity: 0; transform: translateY(-0.15em); }
     @media (prefers-reduced-motion: reduce) {
       .slat { transition: opacity 300ms linear; }
