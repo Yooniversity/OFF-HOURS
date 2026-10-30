@@ -13,7 +13,7 @@
   intro.setAttribute("aria-hidden", "true");
   const slats = (cls) => `<div class="blinds ${cls}">${'<span class="slat"></span>'.repeat(SLATS)}</div>`;
   intro.innerHTML =
-    `<div class="intro-black">${slats("blinds-black")}<div class="intro-logo">OFF-HOURS</div>` +
+    `<div class="intro-black">${slats("blinds-black")}<div class="intro-logo">off hours</div>` +
     `<p class="intro-foot intro-foot-black">Based in Seoul, South Korea<br>&copy; Hayoon Park ${window.COPYRIGHT_YEARS || 2026}</p></div>` +
     slats("blinds-white") +
     `<p class="intro-foot intro-foot-white">move to enter</p>`;
