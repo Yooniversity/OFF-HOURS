@@ -21,7 +21,7 @@
     `<p class="intro-foot intro-foot-black">Based in Seoul, South Korea<br>&copy; Hayoon Park ${window.COPYRIGHT_YEARS || 2026}</p></div>` +
     slats("blinds-white") +
     `<div class="cord"><span class="cord-line"></span><span class="cord-pull"></span></div>` +
-    `<img class="hand" src="assets/img/hand.svg?v=12" alt="">` +
+    `<img class="hand" src="assets/img/hand.svg?v=13" alt="">` +
     `<p class="intro-foot intro-foot-white">click and drag down to enter</p>`;
   document.body.prepend(intro);
   root.classList.add("intro-active");
@@ -53,7 +53,7 @@
       s.style.backgroundColor = `hsl(0 0% ${100 - pi * 5}%)`;
     });
     cord.style.transform = `translate3d(${cx}px, ${cy - innerHeight + p * 14}px, 0)`;
-    hand.style.transform = `translate3d(${cx - 20}px, ${cy + p * 14 + 6}px, 0)`; // handle sits in the pinch
+    hand.style.transform = `translate3d(${cx - 23}px, ${cy + p * 14 + 6}px, 0)`; // handle sits in the pinch
     hint.style.opacity = String(Math.max(0, 1 - p * 2.5));
   }
   const schedule = () => { if (!raf) raf = requestAnimationFrame(render); };
