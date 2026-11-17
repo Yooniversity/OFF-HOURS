@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex">
   <meta property="og:title" content="off-hours">
   <meta property="og:description" content="Extensions from exclusions. Site under construction.">
-  <link rel="icon" href="assets/img/favicon.svg?v=6" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.svg?v=7" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&display=swap" rel="stylesheet">
@@ -17,7 +17,10 @@
     :root { --f-sans: "Archivo", "Noto Sans KR", system-ui, sans-serif; }
     .intro-active, .intro-active body { overflow: hidden; }
     .intro { position: fixed; inset: 0; z-index: 100; }
-    .intro-black { position: absolute; inset: 0; }
+    .intro-black { position: absolute; inset: 0; background: #000; }
+    .intro-black.opening { background: transparent; }
+    .blinds-white { background: #fff; }
+    .blinds-white.open { background: transparent; }
     .blinds { position: absolute; inset: 0; display: flex; flex-direction: column; perspective: 1400px; }
     .slat { flex: 1 1 0; margin-bottom: -1px; transform-origin: 50% 50%;
       transition: transform 700ms cubic-bezier(.6, .05, .3, 1), opacity 120ms linear 580ms; }
@@ -74,6 +77,6 @@
     window.COPYRIGHT_YEARS = (function (s) { var n = new Date().getFullYear(); return n > s ? s + '–' + n : String(s); })(2026);
     document.getElementById('y').textContent = window.COPYRIGHT_YEARS;
   </script>
-  <script src="assets/js/intro.js?v=6"></script>
+  <script src="assets/js/intro.js?v=7"></script>
 </body>
 </html>

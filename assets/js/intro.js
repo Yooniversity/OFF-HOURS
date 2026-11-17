@@ -30,7 +30,7 @@
     items.forEach((s, i) => { const d = reduced ? 0 : i * STAGGER; s.style.transitionDelay = `${d}ms, ${d + (reduced ? 0 : 580)}ms`; });
     blinds.classList.add("open");
     const total = reduced ? 300 : TURN + STAGGER * (SLATS - 1);
-    setTimeout(() => { done(); setTimeout(() => { busy = false; travel = 0; last = null; }, SETTLE); }, total);
+    setTimeout(() => { blinds.style.display = "none"; done(); setTimeout(() => { busy = false; travel = 0; last = null; }, SETTLE); }, total);
   }
 
   function advance() {
@@ -44,6 +44,7 @@
       stage = 2;
       intro.querySelector(".intro-logo").classList.add("out");
       intro.querySelector(".intro-foot-black").classList.add("out");
+      intro.querySelector(".intro-black").classList.add("opening");
       open(intro.querySelector(".blinds-black"), finish);
     }
   }
