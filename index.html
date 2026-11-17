@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex">
   <meta property="og:title" content="off-hours">
   <meta property="og:description" content="Extensions from exclusions. Site under construction.">
-  <link rel="icon" href="assets/img/favicon.svg?v=13" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.svg?v=14" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&display=swap" rel="stylesheet">
@@ -27,23 +27,22 @@
     .blinds-white .slat { background: #ffffff; }
     .blinds-black .slat { background: #000000; }
     .blinds.open .slat { transform: rotateX(-90deg); opacity: 0; }
-    /* Blind cord: the cursor holds the pull; slats tilt while pulling */
+    /* Blind cord fixed at the centre; a hand pinches the handle. Click-and-drag pulls it. */
     .blinds-white:not(.open) .slat { transition: transform 90ms linear; }
-    .intro.pulling-ui { cursor: none; }
+    .intro.pulling-ui { cursor: grab; }
+    .intro.pulling-ui.gripping { cursor: grabbing; }
     .cord { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; height: 100vh;
       transform: translate3d(50vw, -70vh, 0); transition: opacity 250ms ease-out; will-change: transform; }
     .cord-line { position: absolute; left: -0.5px; top: 0; width: 1px; height: 100%; background: #141414; }
-    /* handle: slim black pill with a short ferrule where the cord enters */
-    .cord-pull { position: absolute; left: -3px; top: calc(100% - 1px); width: 6px; height: 44px;
-      border-radius: 3px; background: #141414; }
-    .cord-pull::before { content: ""; position: absolute; left: 1.5px; top: -5px; width: 3px; height: 6px;
+    .cord-pull { position: absolute; left: -3.5px; top: calc(100% - 1px); width: 7px; height: 32px;
+      border-radius: 3.5px; background: #141414; box-shadow: 0 0 0 1.4px #fff; }
+    .cord-pull::before { content: ""; position: absolute; left: 2px; top: -6px; width: 3px; height: 7px;
       border-radius: 1.5px 1.5px 0 0; background: #141414; }
-    /* line-drawn hand that stands in for the cursor while pulling */
-    .hand { position: absolute; left: 0; top: 0; z-index: 3; width: 48px; height: 80px; pointer-events: none;
-      opacity: 0; transition: opacity 200ms ease-out; will-change: transform; }
-    .pulling-ui.hand-on .hand { opacity: 1; }
-    .hand.out { opacity: 0 !important; }
-    .gripping .hand { filter: drop-shadow(0 1px 0 rgba(0,0,0,.15)); }
+    .hand { position: absolute; left: 0; top: 0; width: 66px; height: 110px; pointer-events: none;
+      transition: opacity 250ms ease-out; will-change: transform; }
+    .hand-back { z-index: 1; }
+    .hand-front { z-index: 3; clip-path: polygon(60% 6%, 100% 6%, 100% 40%, 60% 40%); } /* thumb over the handle */
+    .hand.out { opacity: 0; }
     .cord.out { opacity: 0; }
     @media (prefers-reduced-motion: reduce) { .cord { display: none; } }
     .intro-logo { position: absolute; inset: 0; display: grid; place-items: center;
@@ -96,6 +95,6 @@
     window.COPYRIGHT_YEARS = (function (s) { var n = new Date().getFullYear(); return n > s ? s + '–' + n : String(s); })(2026);
     document.getElementById('y').textContent = window.COPYRIGHT_YEARS;
   </script>
-  <script src="assets/js/intro.js?v=13"></script>
+  <script src="assets/js/intro.js?v=14"></script>
 </body>
 </html>
