@@ -1,5 +1,6 @@
 /* Index intro: white -> (blinds) -> black OFF-HOURS -> (blinds) -> page.
-   White stage: the cursor holds a blind cord — pulling down tilts the slats, a full pull opens them.
+   Stages: 1 pull (cord follows cursor, blind stays shut) -> 2 release (cord snaps back, beat) -> 3 white blinds open
+   -> 4 black OFF-HOURS holds -> 5 black blinds open -> page.
    Also advances on click, wheel, key, or IDLE ms without input. */
 (function () {
   const root = document.documentElement;
@@ -9,7 +10,7 @@
 
   const SLATS = 14, STAGGER = 45, TURN = 700, SETTLE = 2000, IDLE = 3000;
   const PULL = Math.min(260, innerHeight * 0.32); // px of downward travel for a full pull
-  const MAX_TILT = 78;                             // deg, slat tilt at full pull
+  const MAX_TILT = 14;                             // deg, slat ripple at full pull (blind stays shut)
 
   const intro = document.createElement("div");
   intro.className = "intro";
@@ -31,31 +32,32 @@
   if (fine && !reduced) intro.classList.add("pulling-ui");
 
   let stage = 0, busy = false, last = null, pull = 0, raf = 0, decay = 0;
-  let cx = innerWidth / 2, cy = innerHeight * 0.3; // cord handle position (rest)
+  let cx = innerWidth / 2, cy = innerHeight * 0.3; // cord handle position
   let idleTimer = setTimeout(advance, IDLE);
   const resetIdle = () => { clearTimeout(idleTimer); idleTimer = setTimeout(advance, IDLE); };
 
-  // ---- pull rendering ----
+  // ---- stage 1: pull (only the cord moves; the blind stays shut) ----
+  const REST = innerHeight * 0.3;
   function render() {
     raf = 0;
     const p = Math.min(1, pull / PULL);
-    white.classList.toggle("tilting", p > 0.002);
-    hint.style.opacity = String(Math.max(0, 1 - p * 3));
+    // blind under tension: slats ripple a few degrees and shade slightly, never opening
     whiteSlats.forEach((s, i) => {
-      const pi = Math.max(0, Math.min(1, p * 1.25 - (i / SLATS) * 0.25)); // top slats lead
+      const pi = Math.max(0, Math.min(1, p * 1.2 - (i / SLATS) * 0.2));
       s.style.transform = `rotateX(${-pi * MAX_TILT}deg)`;
+      s.style.backgroundColor = `hsl(0 0% ${100 - pi * 5}%)`;
     });
-    cord.style.transform = `translate3d(${cx}px,0,0)`;
-    cord.style.setProperty("--len", `${cy + p * 18}px`); // cord stretches a little under tension
+    cord.style.transform = `translate3d(${cx}px, ${cy - innerHeight + p * 14}px, 0)`;
+    hint.style.opacity = String(Math.max(0, 1 - p * 2.5));
   }
   const schedule = () => { if (!raf) raf = requestAnimationFrame(render); };
 
-  // ease the pull back when the hand stops (blind springs up)
+  // hand stops before the click point: cord and blind settle back
   function springBack() {
     cancelAnimationFrame(decay);
     const step = () => {
       if (stage !== 0 || busy) return;
-      pull *= 0.88;
+      pull *= 0.85;
       if (pull < 0.5) pull = 0;
       schedule();
       if (pull > 0) decay = requestAnimationFrame(step);
@@ -74,7 +76,23 @@
     resetIdle();
     clearTimeout(restTimer);
     restTimer = setTimeout(springBack, 450);
-    if (pull >= PULL) advance();
+    if (pull >= PULL) release();
+  }
+
+  // ---- stage 2: release — cord snaps back, a beat, then the blind opens ----
+  function release() {
+    if (stage !== 0 || busy) return;
+    busy = true;
+    clearTimeout(idleTimer); clearTimeout(restTimer); cancelAnimationFrame(decay);
+    cancelAnimationFrame(raf); raf = 1; // stop pull rendering
+    intro.classList.remove("pulling-ui");
+    hint.style.opacity = "0";
+    // slats settle flat, cord springs up to rest and fades
+    whiteSlats.forEach((s) => { s.style.transition = "transform 220ms ease-out, background-color 220ms ease-out"; s.style.transform = ""; s.style.backgroundColor = ""; });
+    cord.style.transition = "transform 320ms cubic-bezier(.2,.9,.3,1.2), opacity 300ms ease-out 260ms";
+    cord.style.transform = `translate3d(${cx}px, ${REST - innerHeight}px, 0)`;
+    cord.classList.add("out");
+    setTimeout(() => { busy = false; advance(); }, reduced ? 0 : 520);
   }
 
   // ---- stages ----
@@ -94,12 +112,11 @@
   function advance() {
     if (busy) return;
     if (stage === 0) {
+      if (!cord.classList.contains("out")) return release();
       stage = 1;
       clearTimeout(idleTimer); clearTimeout(restTimer); cancelAnimationFrame(decay);
       intro.classList.remove("pulling-ui");
       cord.classList.add("out");
-      cancelAnimationFrame(raf); raf = 1; // freeze pull rendering
-      hint.style.opacity = "0";
       open(white, () => {});
     } else if (stage === 1) {
       stage = 2;

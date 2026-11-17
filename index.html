@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex">
   <meta property="og:title" content="off-hours">
   <meta property="og:description" content="Extensions from exclusions. Site under construction.">
-  <link rel="icon" href="assets/img/favicon.svg?v=8" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.svg?v=9" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     .intro-black { position: absolute; inset: 0; background: #000; }
     .intro-black.opening { background: transparent; }
     .blinds-white { background: #fff; }
-    .blinds-white.open, .blinds-white.tilting { background: transparent; }
+    .blinds-white.open { background: transparent; }
     .blinds { position: absolute; inset: 0; display: flex; flex-direction: column; perspective: 1400px; }
     .slat { flex: 1 1 0; margin-bottom: -1px; transform-origin: 50% 50%;
       transition: transform 700ms cubic-bezier(.6, .05, .3, 1), opacity 120ms linear 580ms; }
@@ -30,10 +30,10 @@
     /* Blind cord: the cursor holds the pull; slats tilt while pulling */
     .blinds-white:not(.open) .slat { transition: transform 90ms linear; }
     .intro.pulling-ui { cursor: none; }
-    .cord { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; --len: 30vh;
-      transition: opacity 250ms ease-out; will-change: transform; }
-    .cord-line { position: absolute; left: -0.5px; top: 0; width: 1px; height: var(--len); background: #9a9a9a; }
-    .cord-pull { position: absolute; left: -4px; top: calc(var(--len) - 2px); width: 8px; height: 22px;
+    .cord { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; height: 100vh;
+      transform: translate3d(50vw, -70vh, 0); transition: opacity 250ms ease-out; will-change: transform; }
+    .cord-line { position: absolute; left: -0.5px; top: 0; width: 1px; height: 100%; background: #9a9a9a; }
+    .cord-pull { position: absolute; left: -4px; top: calc(100% - 2px); width: 8px; height: 22px;
       border-radius: 4px 4px 3px 3px; background: #7f5626; }
     .cord.out { opacity: 0; }
     @media (prefers-reduced-motion: reduce) { .cord { display: none; } }
@@ -87,6 +87,6 @@
     window.COPYRIGHT_YEARS = (function (s) { var n = new Date().getFullYear(); return n > s ? s + '–' + n : String(s); })(2026);
     document.getElementById('y').textContent = window.COPYRIGHT_YEARS;
   </script>
-  <script src="assets/js/intro.js?v=8"></script>
+  <script src="assets/js/intro.js?v=9"></script>
 </body>
 </html>
