@@ -21,6 +21,7 @@
     `<p class="intro-foot intro-foot-black">Based in Seoul, South Korea<br>&copy; Hayoon Park ${window.COPYRIGHT_YEARS || 2026}</p></div>` +
     slats("blinds-white") +
     `<div class="cord"><span class="cord-line"></span><span class="cord-pull"></span></div>` +
+    `<img class="hand" src="assets/img/hand.svg?v=10" alt="">` +
     `<p class="intro-foot intro-foot-white">pull to enter</p>`;
   document.body.prepend(intro);
   root.classList.add("intro-active");
@@ -29,7 +30,10 @@
   const whiteSlats = [...white.querySelectorAll(".slat")];
   const cord = intro.querySelector(".cord");
   const hint = intro.querySelector(".intro-foot-white");
+  const hand = intro.querySelector(".hand");
   if (fine && !reduced) intro.classList.add("pulling-ui");
+  // the hand only appears once the pointer is actually on the page
+  window.addEventListener("mousemove", () => intro.classList.add("hand-on"), { once: true, passive: true });
 
   let stage = 0, busy = false, last = null, pull = 0, raf = 0, decay = 0;
   let cx = innerWidth / 2, cy = innerHeight * 0.3; // cord handle position
@@ -48,6 +52,7 @@
       s.style.backgroundColor = `hsl(0 0% ${100 - pi * 5}%)`;
     });
     cord.style.transform = `translate3d(${cx}px, ${cy - innerHeight + p * 14}px, 0)`;
+    hand.style.transform = `translate3d(${cx - 22}px, ${cy + p * 14 - 9}px, 0)`; // fist closes round the handle
     hint.style.opacity = String(Math.max(0, 1 - p * 2.5));
   }
   const schedule = () => { if (!raf) raf = requestAnimationFrame(render); };
@@ -92,6 +97,7 @@
     cord.style.transition = "transform 320ms cubic-bezier(.2,.9,.3,1.2), opacity 300ms ease-out 260ms";
     cord.style.transform = `translate3d(${cx}px, ${REST - innerHeight}px, 0)`;
     cord.classList.add("out");
+    hand.classList.add("out"); // hand lets go and fades; normal cursor returns
     setTimeout(() => { busy = false; advance(); }, reduced ? 0 : 520);
   }
 
