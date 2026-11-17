@@ -17,12 +17,12 @@
   intro.setAttribute("aria-hidden", "true");
   const slats = (cls) => `<div class="blinds ${cls}">${'<span class="slat"></span>'.repeat(SLATS)}</div>`;
   intro.innerHTML =
-    `<div class="intro-black">${slats("blinds-black")}<div class="intro-logo">OFF-HOURS</div>` +
+    `<div class="intro-black">${slats("blinds-black")}<div class="intro-logo"><img src="assets/img/offhours-wordmark.svg?v=15" alt="OFF-HOURS"></div>` +
     `<p class="intro-foot intro-foot-black">Based in Seoul, South Korea<br>&copy; Hayoon Park ${window.COPYRIGHT_YEARS || 2026}</p></div>` +
     slats("blinds-white") +
     `<div class="cord"><span class="cord-line"></span><span class="cord-pull"></span></div>` +
-    `<img class="hand hand-back" src="assets/img/hand.svg?v=14" alt="">` +
-    `<img class="hand hand-front" src="assets/img/hand.svg?v=14" alt="">` +
+    `<img class="hand hand-back" src="assets/img/hand.svg?v=15" alt="">` +
+    `<img class="hand hand-front" src="assets/img/hand.svg?v=15" alt="">` +
     `<p class="intro-foot intro-foot-white">click and drag down to enter</p>`;
   document.body.prepend(intro);
   root.classList.add("intro-active");
