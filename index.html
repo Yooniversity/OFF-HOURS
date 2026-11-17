@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex">
   <meta property="og:title" content="off-hours">
   <meta property="og:description" content="Extensions from exclusions. Site under construction.">
-  <link rel="icon" href="assets/img/favicon.svg?v=5" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.svg?v=6" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&display=swap" rel="stylesheet">
@@ -25,10 +25,9 @@
     .blinds-black .slat { background: #000000; }
     .blinds.open .slat { transform: rotateX(-90deg); opacity: 0; }
     .intro-logo { position: absolute; inset: 0; display: grid; place-items: center;
-      color: #ffffff; font-family: "La Belle Aurore", cursive; font-weight: 400;
-      font-size: clamp(3rem, 11vw, 9.5rem); letter-spacing: 0; line-height: 1;
+      color: #ffffff; font-family: var(--f-sans); font-weight: 500;
+      font-size: clamp(2.4rem, 9vw, 8rem); letter-spacing: -0.01em; font-variation-settings: "wdth" 125;
       transition: opacity 300ms ease-out, transform 300ms ease-out; }
-    .intro-logo img { width: min(64vw, 780px); height: auto; display: block; }
     .intro-logo.out { opacity: 0; transform: translateY(-0.15em); }
     @media (prefers-reduced-motion: reduce) {
       .slat { transition: opacity 300ms linear; }
@@ -75,6 +74,6 @@
     window.COPYRIGHT_YEARS = (function (s) { var n = new Date().getFullYear(); return n > s ? s + '–' + n : String(s); })(2026);
     document.getElementById('y').textContent = window.COPYRIGHT_YEARS;
   </script>
-  <script src="assets/js/intro.js?v=5"></script>
+  <script src="assets/js/intro.js?v=6"></script>
 </body>
 </html>
