@@ -1,7 +1,7 @@
 /* Index intro: white -> (blinds) -> black OFF-HOURS -> (blinds) -> page.
    Stages: 1 pull (cord follows cursor, blind stays shut) -> 2 release (cord snaps back, beat) -> 3 white blinds open
    -> 4 black OFF-HOURS holds -> 5 black blinds open -> page.
-   Also advances on click, wheel, key, or IDLE ms without input. */
+   The white stage advances only by click-and-drag (or Enter / Space). */
 (function () {
   const root = document.documentElement;
   if (location.hash) return; // skip when arriving from an in-site link
@@ -21,8 +21,8 @@
     `<p class="intro-foot intro-foot-black">Based in Seoul, South Korea<br>&copy; Hayoon Park ${window.COPYRIGHT_YEARS || 2026}</p></div>` +
     slats("blinds-white") +
     `<div class="cord"><span class="cord-line"></span><span class="cord-pull"></span></div>` +
-    `<img class="hand" src="assets/img/hand.svg?v=10" alt="">` +
-    `<p class="intro-foot intro-foot-white">pull to enter</p>`;
+    `<img class="hand" src="assets/img/hand.svg?v=11" alt="">` +
+    `<p class="intro-foot intro-foot-white">click and drag down to enter</p>`;
   document.body.prepend(intro);
   root.classList.add("intro-active");
 
@@ -37,8 +37,9 @@
 
   let stage = 0, busy = false, last = null, pull = 0, raf = 0, decay = 0;
   let cx = innerWidth / 2, cy = innerHeight * 0.3; // cord handle position
-  let idleTimer = setTimeout(advance, IDLE);
-  const resetIdle = () => { clearTimeout(idleTimer); idleTimer = setTimeout(advance, IDLE); };
+  let pressed = false; // white stage only advances by click-and-drag
+  let idleTimer = 0;
+  const resetIdle = () => {};
 
   // ---- stage 1: pull (only the cord moves; the blind stays shut) ----
   const REST = innerHeight * 0.3;
@@ -52,7 +53,7 @@
       s.style.backgroundColor = `hsl(0 0% ${100 - pi * 5}%)`;
     });
     cord.style.transform = `translate3d(${cx}px, ${cy - innerHeight + p * 14}px, 0)`;
-    hand.style.transform = `translate3d(${cx - 22}px, ${cy + p * 14 - 9}px, 0)`; // fist closes round the handle
+    hand.style.transform = `translate3d(${cx - 23}px, ${cy + p * 14 + 6}px, 0)`; // handle sits in the pinch
     hint.style.opacity = String(Math.max(0, 1 - p * 2.5));
   }
   const schedule = () => { if (!raf) raf = requestAnimationFrame(render); };
@@ -74,13 +75,12 @@
   function onPullMove(x, y) {
     if (stage !== 0 || busy) return;
     cancelAnimationFrame(decay);
-    if (last) pull = Math.max(0, pull + (y - last.y)); // down adds tension, up releases
-    last = { x, y };
     cx = x; cy = y;
+    if (pressed) {
+      if (last) pull = Math.max(0, pull + (y - last.y)); // down adds tension, up releases
+      last = { x, y };
+    }
     schedule();
-    resetIdle();
-    clearTimeout(restTimer);
-    restTimer = setTimeout(springBack, 450);
     if (pull >= PULL) release();
   }
 
@@ -148,15 +148,19 @@
     lastBlack = { x: e.clientX, y: e.clientY };
     if (travel > 90 && !busy) { travel = 0; lastBlack = null; advance(); }
   };
+  const grab = (x, y) => { pressed = true; last = { x, y }; cancelAnimationFrame(decay); intro.classList.add("gripping"); };
+  const letGo = () => { if (!pressed) return; pressed = false; last = null; intro.classList.remove("gripping"); if (stage === 0 && !busy) springBack(); };
+  const onDown = (e) => { if (stage === 0) { e.preventDefault(); grab(e.clientX, e.clientY); } else advance(); };
+  const onUp = () => letGo();
   const onTouchMove = (e) => { const t = e.touches[0]; if (t && stage === 0) onPullMove(t.clientX, t.clientY); };
-  const onTouchStart = (e) => { const t = e.touches[0]; last = t ? { x: t.clientX, y: t.clientY } : null; if (stage !== 0) advance(); };
-  const onKey = (e) => { e.preventDefault(); advance(); };
-  const onWheel = (e) => { e.preventDefault(); advance(); };
-  const onDown = () => advance();
+  const onTouchStart = (e) => { const t = e.touches[0]; if (stage === 0) { if (t) { cx = t.clientX; cy = t.clientY; grab(cx, cy); schedule(); } } else advance(); };
+  // keyboard stays available for accessibility: Enter / Space pull the cord
+  const onKey = (e) => { if (stage === 0 && e.key !== "Enter" && e.key !== " ") return; e.preventDefault(); advance(); };
+  const onWheel = (e) => { e.preventDefault(); if (stage !== 0) advance(); };
 
   const L = [["mousemove", onMouse, { passive: true }], ["touchmove", onTouchMove, { passive: true }],
-             ["touchstart", onTouchStart, { passive: true }], ["keydown", onKey], ["wheel", onWheel, { passive: false }],
-             ["mousedown", onDown]];
+             ["touchstart", onTouchStart, { passive: true }], ["touchend", onUp], ["mouseup", onUp],
+             ["keydown", onKey], ["wheel", onWheel, { passive: false }], ["mousedown", onDown]];
   L.forEach(([t, f, o]) => window.addEventListener(t, f, o));
   const off = () => L.forEach(([t, f]) => window.removeEventListener(t, f));
 
