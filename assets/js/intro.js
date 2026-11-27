@@ -17,12 +17,12 @@
   intro.setAttribute("aria-hidden", "true");
   const slats = (cls) => `<div class="blinds ${cls}">${'<span class="slat"></span>'.repeat(SLATS)}</div>`;
   intro.innerHTML =
-    `<div class="intro-black">${slats("blinds-black")}<div class="intro-logo"><img src="assets/img/offhours-wordmark.svg?v=15" alt="OFF-HOURS"></div>` +
+    `<div class="intro-black">${slats("blinds-black")}<div class="intro-logo"><img src="assets/img/offhours-wordmark.svg?v=16" alt="OFF-HOURS"></div>` +
     `<p class="intro-foot intro-foot-black">Based in Seoul, South Korea<br>&copy; Hayoon Park ${window.COPYRIGHT_YEARS || 2026}</p></div>` +
     slats("blinds-white") +
     `<div class="cord"><span class="cord-line"></span><span class="cord-pull"></span></div>` +
-    `<img class="hand hand-back" src="assets/img/hand.svg?v=15" alt="">` +
-    `<img class="hand hand-front" src="assets/img/hand.svg?v=15" alt="">` +
+    `<img class="hand hand-back" src="assets/img/hand.svg?v=16" alt="">` +
+    `<img class="hand hand-front" src="assets/img/hand.svg?v=16" alt="">` +
     `<p class="intro-foot intro-foot-white">click and drag down to enter</p>`;
   document.body.prepend(intro);
   root.classList.add("intro-active");
@@ -53,6 +53,7 @@
       s.style.backgroundColor = `hsl(0 0% ${100 - pi * 5}%)`;
     });
     const y0 = REST + Math.min(pull, PULL) * VIS; // handle top
+    cord.style.height = `${innerHeight}px`; // px, not 100vh: mobile 100vh is taller than the visible viewport
     cord.style.transform = `translate3d(${cx()}px, ${y0 - innerHeight}px, 0)`;
     hands.forEach((h) => (h.style.transform = `translate3d(${cx() - 39}px, ${y0 - 12}px, 0)`)); // handle in the pinch
     hint.style.opacity = String(Math.max(0, 1 - p * 2.5));
